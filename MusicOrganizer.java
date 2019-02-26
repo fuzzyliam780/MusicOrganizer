@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.*;
 
 /**
  * A class to hold details of audio tracks.
@@ -124,6 +125,27 @@ public class MusicOrganizer
     {
         if(tracks.size() > 0) {
             player.startPlaying(tracks.get(0).getFilename());
+        }
+    }
+    
+    public void playRandomTrack()
+    {
+        if(tracks.size() > 0) {
+            Random rSong = new Random();
+            int rTrack = rSong.nextInt(tracks.size());
+            player.startPlaying(tracks.get(rTrack).getFilename());
+        }
+    }
+    
+    public void shuffleTracks()
+    {
+        if(tracks.size() > 0) {
+            ArrayList<Track> songsToBePlayed = new ArrayList<Track>(tracks);
+            Collections.shuffle(songsToBePlayed);
+            do{
+                player.startPlaying(songsToBePlayed.get(0).getFilename());
+                songsToBePlayed.remove(0);
+            }while(!tracks.isEmpty());
         }
     }
     
